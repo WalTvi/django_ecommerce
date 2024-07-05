@@ -1,0 +1,37 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+{% csrf_token %}
+<form>
+    <h1 class="row justify-content-center align-items-center">REGISTRO</h1>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label ">Usuario</label>
+        <div class="row justify-content-center align-items-center vl-100">
+            {{form.user}}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Nombre Completo</label>
+        <div class="row justify-content-center align-items-center vl-100">
+            {{form.name}}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Email</label>
+        <div class="row justify-content-center align-items-center vl-100">
+            {{form.email}}
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+        <div class="row justify-content-center align-items-center vl-100">
+            {{form.password}}
+            {{mensaje}}
+        </div>
+    </div>
+
+    <a href="{% url 'login' %}" class="row justify-content-center align-items-center">Ya tienes cuenta?</a>
+    <div class="mb-3 row justify-content-center align-items-center">
+        <button type="POST" class="btn btn-dark">Crear Cuenta</button>
+    </div>
+{% endblock content %}

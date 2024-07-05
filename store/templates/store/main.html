@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+	<title>Ecom</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+			var cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+				var cookies = document.cookie.split(';');
+				for (var i = 0; i < cookies.length; i++) {
+					var cookie = cookies[i].trim();
+
+					if (cookie.substring(0, name.length + 1) === (name + '=')) {
+						cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+						break;
+					}
+				}
+			}
+			return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+
+			var cookieArr = document.cookie.split(";");
+
+
+			for (var i = 0; i < cookieArr.length; i++) {
+				var cookiePair = cookieArr[i].split("=");
+
+				if (name == cookiePair[0].trim()) {
+
+					return decodeURIComponent(cookiePair[1]);
+				}
+			}
+
+
+			return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined) {
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+
+	</script>
+
+</head>
+
+<body class="d-flex flex-column min-vh-100"">
+
+
+	<nav class="nav nav-pills navbar-dark bg-dark">
+		<a class="nav-link text-white" aria-current="page" href="{% url 'index' %}">Home</a>
+		<a class="nav-link text-white" href="{% url 'store' %}">Tienda</a>
+		<a class="nav-link text-white" href="{% url 'registro' %}">Regístrate!</a>
+		<a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+		<div class="nav-item justify-content-end">
+			<a class="nav-link" href="{% url 'cart' %}">
+				<span class="visually-hidden">Carrito</span>
+				<img id="cart-icon" src="{% static 'images/cart.png' %}">
+			</a>
+		</div>
+	</nav>
+
+
+
+	<div class="container">
+		<br>
+		{% block content %}
+
+
+		{% endblock content %}
+		<br>
+	</div>	
+	<footer id="footer" class="mt-auto bg-body-tertiary navbar-dark bg-dark">
+		<div class="container p-4">
+			<div class="row">
+				<div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+					<h5 class="text-uppercase  text-white">Footer text</h5>
+
+					<p class="text-white">
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+						molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+						voluptatem veniam, est atque cumque eum delectus sint!
+					</p>
+				</div>
+				<div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+					<h5 class="text-uppercase text-white">Footer text</h5>
+
+					<p class=" text-white">
+						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+						molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+						voluptatem veniam, est atque cumque eum delectus sint!
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="text-center p-3  text-white" style="background-color: rgba(0, 0, 0, 0.05);">
+			Tienda de electronicos
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+</body>
+
+</html>

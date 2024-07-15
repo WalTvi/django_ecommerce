@@ -57,7 +57,7 @@ def login_view(request):
         else:
             messages.error(request, 'Error en la validación de usuario')
         
-    return render(request, 'store/login.html')
+    return render(request, 'store/index.html')
 
 def registro(request):
     data= {'form': CustomerForm()}

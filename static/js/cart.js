@@ -18,7 +18,7 @@ for (i = 0; i < updateBtns.length; i++) {
 function updateUserOrder(productId, action) {
     console.log('User is authenticated, sending data to API...');
 
-    var url = 'http://54.198.105.67:8000/api/cart_items/';  // URL de la API externa para almacenar datos del carrito
+    var url = 'http://54.172.236.64:8000/api/cart_items/';  // URL de la API externa para almacenar datos del carrito
 
     // Datos del carrito a enviar a la API
     var cartData = {
@@ -26,14 +26,12 @@ function updateUserOrder(productId, action) {
             { product_id: parseInt(productId), quantity: action === 'add' ? 1 : -1 }
             // Ajusta según la estructura requerida por tu API externa
         ],
-        user_id: user_id  // Asegúrate de tener el ID del usuario actual
     };
 
     fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': csrftoken
         },
         body: JSON.stringify(cartData)
     })
